@@ -20,20 +20,14 @@ public class Node {
             return;
         }
         children.add(node);
-        node.setParent(this);
-
+        //node.setParent(this);
     }
 
-    public boolean isAncestorOf(Node node){ //checks if node is already in solution path.
-        Node tmp = this;
-        while(tmp.getValue() != 0){
-            if(tmp.parent == node){
-                return true;
-            }
-            tmp = tmp.getParent();
-        }
-        return false;
+    public ArrayList<Node> getChildren(){
+        return children;
     }
+
+    public void clearChildren(){children.clear();}
 
     public Node getParent() { //get previous value in solution path
         return parent;
@@ -43,7 +37,28 @@ public class Node {
         parent = node;
     }
 
-    private int value = 0;
+    public boolean isAncestorOf(Node node){ //checks if node is already in solution path.
+        Node tmp = this;
+        while(tmp.getValue() != -1){
+            if(tmp.parent == node){
+                return true;
+            }
+            if(tmp.parent == null){
+                return false;
+            }
+            tmp = tmp.getParent();
+        }
+        return false;
+    }
+
+    public void printTree(){
+        System.out.print(this.getValue());
+        for(int i=0; i<this.getChildren().size(); i++){
+            this.getChildren().get(i).printTree();
+        }
+    }
+
+    private int value = -1;
     private ArrayList<Node> children = new ArrayList<>(); //list of possible next values in solution path
     private Node parent = null;
 
