@@ -9,33 +9,26 @@ public class Node {
 
     public Node(int value) { //Node constructor
         this.value = value;
-    }
+    } //data structure for cell in grid
 
     public int getValue() { //return node value
         return value;
-    }
+    } //returns value in cell
 
     public void addChild(Node node) { //add onto solution path
         if(parent == node){ //prevents backtracking
             return;
         }
         children.add(node);
-        //node.setParent(this);
     }
-
-    public ArrayList<Node> getChildren(){
-        return children;
-    }
-
-    public void clearChildren(){children.clear();}
 
     public Node getParent() { //get previous value in solution path
         return parent;
-    }
+    } //returns previous Node in linked list
 
     protected void setParent(Node node) { //set previous value in solution path
         parent = node;
-    }
+    } //set previous Node in linked list
 
     public boolean isAncestorOf(Node node){ //checks if node is already in solution path.
         Node tmp = this;
@@ -49,13 +42,6 @@ public class Node {
             tmp = tmp.getParent();
         }
         return false;
-    }
-
-    public void printTree(){
-        System.out.print(this.getValue());
-        for(int i=0; i<this.getChildren().size(); i++){
-            this.getChildren().get(i).printTree();
-        }
     }
 
     private int value = -1;
